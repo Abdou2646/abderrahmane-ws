@@ -1,13 +1,11 @@
-FROM node:22-alpine
+FROM teddysun/xray:latest
 
-WORKDIR /app
+WORKDIR /etc/xray
 
-COPY package*.json ./
-RUN npm install --omit=dev
-
-COPY server.js ./
+COPY config.json /etc/xray/config.json
 
 ENV PORT=10000
+
 EXPOSE 10000
 
-CMD ["npm", "start"]
+CMD ["run", "-config", "/etc/xray/config.json"]
